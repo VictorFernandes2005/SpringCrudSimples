@@ -1,0 +1,1 @@
+A ideia é aprender a utilizar tanto o Spring boot, como o versionamento com o git e o github.
