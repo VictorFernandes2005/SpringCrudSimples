@@ -6,6 +6,6 @@ import com.estudo.TesteCrud.model.MensagemModel;
 import com.estudo.TesteCrud.model.UserModel;
 
 
-public interface MensagemRepository extends CrudRepository<MensagemModel,String>{
+public interface MensagemRepository extends CrudRepository<MensagemModel,Long>{
     Iterable<MensagemModel> findByUser(UserModel user);
 }

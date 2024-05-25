@@ -1,5 +1,7 @@
 package com.estudo.TesteCrud.controller;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,24 +20,21 @@ import jakarta.validation.Valid;
 @Controller // defini para o spring que essa classe é um controlador
 public class UserController {
 
+    @Autowired
     private UserRepository userR;
     private MensagemRepository msgR;
 
     // Cadastrar novo User
     @RequestMapping(value = "/Cadastrar", method = RequestMethod.GET)
-    public String form(){
+    public String addUser(){
         return"user/userForm";
     }
 
     @RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
-    public String form(@Valid UserModel user, BindingResult result, RedirectAttributes att){
-
-        if(result.hasErrors()){ // caso ocorra um erro ao cadastrar o user:
-            att.addFlashAttribute("mensagem","verifique os valores inseridos.");
-            return "redirect:/Cadastrar";
-        }
+    public String addUser(@Valid UserModel user, BindingResult result){
+        if(result.hasErrors()){return"deu_pau";}
+        System.out.println(userR==null);
         userR.save(user);
-        att.addFlashAttribute("mensagem","User cadastrado!");
         return "redirect:/Cadastrar";
     }
 
@@ -57,5 +56,35 @@ public class UserController {
         mv.addObject("mensagens", msgs);
         return mv;
     }
+    //deleta vaga
+    @RequestMapping(value = "/delUser")
+    public String deletarUser(String username){
+        UserModel user = userR.findByUsername(username);
+        userR.delete(user);
+        return "redirect:/user";
+
+    }
+
+    // adicionar mensagem
+
+    @RequestMapping(value = "/NewMsg", method = RequestMethod.GET)
+    public String addMsg(){
+        return "user/msgForm";
+    }
+    @RequestMapping(value = "/NewMsg/{username}")
+    public String addMsg(@PathVariable("username") String username, @Valid MensagemModel msg, 
+                        BindingResult result, RedirectAttributes att){
+        if(result.hasErrors()){
+            att.addFlashAttribute("Mensgagem", "erro bobo");
+            return "redirect:/NewMsg";
+        }
+        UserModel user = userR.findByUsername(username);
+        msg.setUser(user);
+        msgR.save(msg);
+        att.addFlashAttribute("mensagem","viva!");
+        return "redirect:/NewMsg/{username}";
+    }
+
+    // deleta mensagem
 
 }
