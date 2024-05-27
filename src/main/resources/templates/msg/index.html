@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mensagens</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>mensagem</th>
+            </tr>
+            <tr th:each="msg : ${msg}">
+                <!--Tabela Mensagem-->
+                <table style="background-color:#ccccee;" width="90%">
+                    <tr>
+                        <td><p style="font-size: 24px;text-align: left;" th:text="${msg.titulo}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p style="font-size: 18px;text-align: justify;" th:text="${msg.mensagem}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p style="font-size: 12px;text-align: right;" th:text="${msg.data}"></p></td>
+                    </tr> 
+                </table>
+                
+            </tr>
+        </table>
+        <a href="/novaMensagem"><button>Nova Mensagem</button></button></a>
+    </body>
+</html>
