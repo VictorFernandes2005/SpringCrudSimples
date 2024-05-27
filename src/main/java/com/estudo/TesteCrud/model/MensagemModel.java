@@ -20,12 +20,7 @@ public class MensagemModel{
     private long id;
 
     @NotEmpty // defini a variável como não vazia (assim como da pra fazer no mysql)
-    @Column(unique = true)
     private String titulo;
-
-    @NotEmpty
-    @ManyToOne
-    private UserModel user;
 
     @NotEmpty
     private String mensagem;
