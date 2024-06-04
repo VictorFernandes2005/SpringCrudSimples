@@ -4,15 +4,23 @@
         <title>Editar Mensagem</title>
     </head>
     <body>
-        <form th:object="${msg}" action="/editarMensagem" method="post">
-            <input name="id" th:field="*{id}" type="hidden">
-            <h2>Titulo</h2>
-            <input name="titulo" type="text" th:field="*{titulo}">
-            <h2>Mensagem</h2>
-            <textarea name="mensagem" maxlength="255" th:field="*{Mensagem}"></textarea>
-            <h2>Data</h2>
-            <input name="data" type="date" th:field="*{data}">
-            <input type="submit" value="Editar Mensagem">
-        </form>
+        <div th:if="${error}"><!--caso a mensagem nao exista-->
+            <h1 th:text="${error}" style="color:red">Error</h1>
+            <a href="/"><button>Voltar para a tela inicial</button></a>
+        </div>
+
+        <div th:unless="${error}"><!--caso a mensagem exista-->
+            <form th:object="${msg}" action="/editarMensagem" method="post">
+                <input name="id" th:field="*{id}" type="hidden">
+                <h2>Titulo</h2>
+                <input name="titulo" type="text" th:field="*{titulo}">
+                <h2>Mensagem</h2>
+                <textarea name="mensagem" maxlength="255" th:field="*{Mensagem}"></textarea>
+                <h2>Data</h2>
+                <input name="data" type="date" th:field="*{data}">
+                <input type="submit" value="Editar Mensagem">
+                <p th:if="${error}" th:text="${error}" style="color:red;">error</p>
+            </form>
+        </div>
     </body>
 </html>

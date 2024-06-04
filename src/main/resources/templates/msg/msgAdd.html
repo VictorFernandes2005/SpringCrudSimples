@@ -4,14 +4,15 @@
         <title>Criar Nova Mensagem</title>
     </head>
     <body>
-        <form action="/novaMensagem" method="post">
+        <form action="/novaMensagem" method="post" th:object="${msg}">
             <h2>Titulo</h2>
-            <input name="titulo" type="text">
+            <input name="titulo" type="text" th:field="*{titulo}">
             <h2>Mensagem</h2>
-            <textarea name="mensagem" maxlength="255"></textarea>
+            <textarea name="mensagem" maxlength="255" th:field="*{Mensagem}"></textarea>
             <h2>Data</h2>
-            <input name="data" type="date">
+            <input name="data" type="date" th:field="*{data}">
             <input type="submit" value="Nova Mensagem">
+            <p th:if="${error}" th:text="${error}" style="color:red;">error</p>
         </form>
     </body>
 </html>

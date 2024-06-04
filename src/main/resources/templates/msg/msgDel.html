@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deletar Mensagem</title>
+</head>
+<body>
+    <div th:if="${error}"><!--caso a mensagem nao exista-->
+        <h1 th:text="${error}" style="color:red">Error</h1>
+        <a href="/"><button>Voltar para a tela inicial</button></a>
+    </div>
+
+    <div th:unless="${error}"><!--caso a mensagem exista-->
+        <h1>Você deseja mesmo deletar a seguinte mensagem:</h1>
+        <table style="background-color:#ccccee;" width="90%">
+            <tr>
+                <td><p style="font-size: 24px;text-align: left;" th:text="${titulo}"></p></td>
+            </tr>
+            <tr>
+                <td><textarea readonly cols="64" rows="4" style="font-size: 18px;text-align: justify;" th:text="${mensagem}">
+                </textarea></td>
+            </tr>
+            <tr>
+                <td><p style="font-size: 12px;text-align: right;" th:text="${data}"></p></td>
+            </tr> 
+        </table>
+        <br>
+        <a href="/"><button>Não</button></a>
+        <form th:object="${msg}" action="/deletarMensagem" method="post">
+            <input type="hidden" th:field="*{id}" name="id">
+            <input type="hidden" th:field="*{titulo}" name="titulo">
+            <input type="hidden" th:field="*{mensagem}" name="mensagem">
+            <input type="hidden" th:field="*{data}" name="data">
+            <input type="submit" value="Sim">
+        </form>
+    </div>
+   
+</body>
+</html>

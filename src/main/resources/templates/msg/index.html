@@ -15,7 +15,8 @@
                         <td><p style="font-size: 24px;text-align: left;" th:text="${msg.titulo}"></p></td>
                     </tr>
                     <tr>
-                        <td><p style="font-size: 18px;text-align: justify;" th:text="${msg.mensagem}"></p></td>
+                        <td><textarea readonly cols="64" rows="4" style="font-size: 18px;text-align: justify;" th:text="${msg.mensagem}">
+                        </textarea></td>
                     </tr>
                     <tr>
                         <td><p style="font-size: 12px;text-align: right;" th:text="${msg.data}"></p></td>
